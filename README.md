@@ -10,4 +10,4 @@ To do:
 - port to iOS and Android as a minigame
 
 Inspiration:
-- Inspired by an antiquated ticket selling console at a nifty old movie theater. Whenever one button in the array was pushed, another would pop up
+- Inspired by an antiquated ticket selling console at a nifty old movie theater. Whenever one button in the array was pushed, another would pop up!
