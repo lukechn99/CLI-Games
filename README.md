@@ -8,3 +8,6 @@ To do:
 - levels of increasing difficulty (4x4, 5x5, etc.)
 - use hash map to ensure solvability of each board
 - port to iOS and Android as a minigame
+
+Inspiration:
+- Inspired by an antiquated ticket selling console at a nifty old movie theater. Whenever one button in the array was pushed, another would pop up!
