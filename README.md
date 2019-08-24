@@ -6,7 +6,7 @@ Rules:
 To do:
 - option to make game objective changing white to black
 - levels of increasing difficulty (4x4, 5x5, etc.)
-- use hash map to ensure solvability of each board
+- incorporate hash map with algorithm based on a finite directed path to ensure solvability of each board
 - port to iOS and Android as a minigame
 
 Inspiration:
