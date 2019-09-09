@@ -56,16 +56,16 @@ public class NewGame {
 		Random r = new Random();
 		int gen1;
 		gen1 = r.nextInt(buttons.length);								// picks random button to be the gen1/dummy/omega
-		buttons[gen1].setGen(1);										// allows button to identify self as 1st
+		//buttons[gen1].setGen(1);										// allows button to identify self as 1st
 		buttons[gen1].setTrigger(gen1);									// sets the trigger attribute of the button
 		int target;
 		int howMany2 = r.nextInt((int)Math.sqrt(buttons.length)) + 1;	// determine how many gen2 buttons there will be
 		int [] gen2 = new int [howMany2];								
-		for (i = 0; i < howMany2; i++) {
+		for (int i = 0; i < howMany2; i++) {
 			target = r.nextInt(buttons.length);
-			if (buttons[target].getTrigger() == null) {
-				buttons[target].setTrigger() = gen1;
-				buttons[target].setGen() = 2;
+			if (buttons[target].getTrigger() == 0) {					// originally compared to null, but ints init to 0, make compatible later
+				buttons[target].setTrigger(gen1);
+				//buttons[target].setGen(2);
 				gen2[i] = target;										// array of all gen2 buttons
 			}
 			else {}// try random again, or shuffle up and down?
