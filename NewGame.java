@@ -11,7 +11,6 @@ public class NewGame {
 	public static boolean gameOn = true;
 	public static ButtonWithID [] buttons = new ButtonWithID[9]; // if more levels are added, then this needs to be recreated
 	public static int [] trigs = new int[9]; // 
-
 	public static void generateBoard () {
 		// initiate a swing frame
 		JFrame f = new JFrame();
@@ -29,6 +28,7 @@ public class NewGame {
 				buttons[i].getButton().setBackground(Color.WHITE);
 			}
 			f.add(buttons[i].getButton());
+			buttons[i].setTrigger(i);
 			int efinal = i; // used to bypass the need for i to be final
 			buttons[i].getButton().addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){changeColor(efinal);}});
@@ -43,33 +43,6 @@ public class NewGame {
 				buttons[i * 3 + j].getButton().setBounds(j * 200, i * 200, 200, 200);
 			}
 		}
-
-		/*
-		JButton b1 = new JButton();
-		JButton b2 = new JButton();
-		JButton b3 = new JButton();
-		JButton b4 = new JButton();
-		buttons[0] = b1;
-		buttons[1] = b2;
-		buttons[2] = b3;
-		buttons[3] = b4;
-		b1.setBackground(Color.BLACK);
-		b2.setBackground(Color.WHITE);
-		b3.setBackground(Color.WHITE);
-		b4.setBackground(Color.BLACK);
-		b1.setBounds(0, 0, 200, 200); // x, y, width, height
-		b2.setBounds(200, 0, 200, 200);
-		b3.setBounds(0, 200, 200, 200);
-		b4.setBounds(200, 200, 200, 200);
-		f.add(b1);
-		f.add(b2);
-		f.add(b3);
-		f.add(b4);
-		b1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){changeColor(0);}});
-		b2.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){changeColor(1);}});
-		b3.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){changeColor(2);}});
-		b4.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){changeColor(3);}});
-		*/
 	}
 
 	public static void changeColor (int i) {
@@ -81,57 +54,41 @@ public class NewGame {
 
 	public static void triggerHash () {
 		Random r = new Random();
-		int rtrigger = r.randint();
-		// find hash algorithm to assign a playable game
-		/*
-		// if the spot in arr with index key is empty, make this the first entry
-		if (arr[key] == null) { 
-			arr[key] = new Node(token, null);
-		}
-
-		// else, shuffle ptr down and compare tokens, if the token is unique, put at the end of the linked list
-		else {
-			ptr = arr[key];
-			trailer = ptr;
-			while (ptr != null) {
-				if (ptr.getData().equals(token)) {
-					return -1; // does this make sense?
-				}
-				trailer = ptr;
-				ptr = ptr.getNext();
+		int gen1;
+		gen1 = r.nextInt(buttons.length);								// picks random button to be the gen1/dummy/omega
+		buttons[gen1].setGen(1);										// allows button to identify self as 1st
+		buttons[gen1].setTrigger(gen1);									// sets the trigger attribute of the button
+		int target;
+		int howMany2 = r.nextInt((int)Math.sqrt(buttons.length)) + 1;	// determine how many gen2 buttons there will be
+		int [] gen2 = new int [howMany2];								
+		for (i = 0; i < howMany2; i++) {
+			target = r.nextInt(buttons.length);
+			if (buttons[target].getTrigger() == null) {
+				buttons[target].setTrigger() = gen1;
+				buttons[target].setGen() = 2;
+				gen2[i] = target;										// array of all gen2 buttons
 			}
-			trailer.setNext(new Node(token, null));
+			else {}// try random again, or shuffle up and down?
 		}
 
-		return key;
-	}*/
+	}
+		/* Hash Algorithm:
+		*1. Randomly assign one dummy node
+		*2. Randomly decide how many paths will lead to dummy node (anywhere from 1 to n-1) 
+		*3. Recursively do this for the "second generation" of nodes
+
+		we have each nbutton that has an id and a field to match with another
+		IDs go from 0 to n-1 ... do we need nodes?
+		pick random number from 0 to n-1 and choose that as the dummy node
+		dummy node has a special protocol that says it activates itself (or a random node for 
+		added difficulty), until all other nodes are deactivated
+		*/
+		
+
+	
 
 	public static void main (String [] args) {
 		generateBoard();
 		triggerHash();
-
-		// implement mapping with hash tables to make a viable collision-free setup
-		// add new button that calls new game method and assigns new triggers
-		/* OLD CODE
-		Random r = new Random();
-		int [][] triggerChoices = new int [9][8];
-		for (int i = 0; i < buttons.length; i ++) {
-			for (int j = 0; j < buttons.length - 1; j ++) {
-
-			}
-		}
-		int [] b1 = {2, 3, 4};
-        int [] b2 = {1, 3, 4};
-        int [] b3 = {2, 4, 1};
-        int [] b4 = {2, 3, 1};
-		int trig1 = b1[r.nextInt(2)];
-		int trig2 = b2[r.nextInt(2)];
-		int trig3 = b3[r.nextInt(2)];
-		int trig4 = b4[r.nextInt(2)];
-		trigs[0] = trig1;
-		trigs[1] = trig2;
-		trigs[2] = trig3;
-		trigs[3] = trig4;
-		*/
 	}
 }
