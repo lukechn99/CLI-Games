@@ -9,12 +9,12 @@ import java.lang.Math.*;
 public class NewGame {
 	//public static int [] board = new int[4];
 	public static boolean gameOn = true;
-	public static ButtonWithID [] buttons = new ButtonWithID[9]; // if more levels are added, then this needs to be recreated
-	public static int [] trigs = new int[9]; // 
+	public static ButtonWithID [] buttons = new ButtonWithID[9];		// if more levels are added, then this needs to be recreated
+	public static int [] trigs = new int[9];							// array of triggers. Update with the button object trigger, this one is no longer needed
 	public static void generateBoard () {
 		// initiate a swing frame
-		JFrame f = new JFrame();
-		f.setSize(610, 610);
+		JFrame f = new JFrame();										// for Android app, this is a new activity
+		f.setSize(610, 610);											// consider rectangular tiles or 
 		f.setLayout(null);
 		f.setVisible(true);
 
